@@ -1,4 +1,5 @@
 import Counter from "./components/Counter"
+import Fetch from "./components/Fetch"
 import Formulario from "./components/Formulario"
 
 const App = () => {
@@ -6,6 +7,7 @@ const App = () => {
     <>
     <Counter/>
     <Formulario />
+    <Fetch />
     </>
   )
 }
