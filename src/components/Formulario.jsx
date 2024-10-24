@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { useForm } from "../hooks/UseForm"
 import { Box, Button, TextField, Typography } from "@mui/material";
 
@@ -15,6 +16,10 @@ const Formulario = () => {
         console.log(username, email, password)
     }
 
+    const focusRef = useRef()
+    useEffect(() =>{
+        focusRef.current.focus()
+    },[])
     return (
         <Box
             sx={{
@@ -43,6 +48,7 @@ const Formulario = () => {
                 />
 
                 <TextField
+                    inputRef ={focusRef}
                     fullWidth
                     label="Correo electrónico"
                     name="email"

@@ -29,7 +29,6 @@ export const useFetch = () => {
             //desestructuramos la data que recibimos
             const res = await fetch(url, options)
             const data = await res.json()
-            console.log(data)
             //llamos a funcion fetch para actualizar estado
             setState({
                 data,
