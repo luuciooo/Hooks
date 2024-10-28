@@ -1,32 +1,12 @@
 import { Box, Button, Checkbox, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography,} from "@mui/material"
 import { useForm } from "../hooks/UseForm"
-import { useReducer } from "react"
+import { useDispatch, useSelector } from "react-redux"
 
 const ListadeTareas = () => {
-    const initialState = [{
-        id: 1, name: 'Explicar Reducer', finalizada: false
-    }]
 
-    const tareaReducer = (state = initialState, action = {}) => {
-        switch (action.type) {
-            case '[TAREAS] Agregar Tarea':
-                return [...state, action.payload]
-            case '[TAREAS] Finalizar Tarea':
-                return state.map(tarea => {
-                    if (tarea.id === action.payload) {
-                        return { ...tarea, finalizada: true }
-                    }
-                    return tarea;
-                })
-            case '[TAREAS] Eliminar Tarea':
-                return state.filter(tarea => tarea.id !== action.payload)
-            case '[TAREAS] Borrar Tareas':
-                return []
-            default:
-                return state;
-        }
-    }
-
+    const tareas = useSelector(state => state)
+    const dispatch = useDispatch()
+    
     const addTask = (event) => {
         event.preventDefault();
         const nuevaTarea = {
@@ -65,7 +45,6 @@ const ListadeTareas = () => {
     }
 
     const { tarea, onInputChange } = useForm({ tarea: '' })
-    const [state, dispatch] = useReducer(tareaReducer, initialState)
     return (
         <>
             <Box
@@ -134,7 +113,7 @@ const ListadeTareas = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {state.map((tarea) => (
+                        {tareas.map((tarea) => (
                             <TableRow key={tarea.id}>
                                 <TableCell>{tarea.id}</TableCell>
                                 <TableCell>{tarea.name}</TableCell>
