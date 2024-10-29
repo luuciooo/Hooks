@@ -9,6 +9,7 @@ const AppNav = () => {
             <AppBar position="static">
                 <Toolbar>
                     <Box sx={{ display: 'flex', gap: 2 }}>
+                    <NavLink to="/" style={{ color: 'inherit', textDecoration: 'none' }}>Home</NavLink>
                         <NavLink to="/counters" style={{ color: 'inherit', textDecoration: 'none' }}>Contadores</NavLink>
                         <NavLink to="/calculo" style={{ color: 'inherit', textDecoration: 'none' }}>Calculo</NavLink>
                         <NavLink to="/fetchs" style={{ color: 'inherit', textDecoration: 'none' }}>Fetchs</NavLink>

@@ -1,25 +1,28 @@
-import { useEffect, useRef } from "react";
-import { useForm } from "../hooks/UseForm"
+import { useContext, useEffect, useRef } from "react";
+import { useForm } from "../hooks/UseForm";
 import { Box, Button, TextField, Typography } from "@mui/material";
+import { UserContext } from "../context/UseContext";
 
 const Formulario = () => {
-    const initialForm = {
-        username: '',
-        email: '',
-        password: ''
-    }
-    const { username, email, password, onInputChange } = useForm(initialForm)
+    const { user, setUser } = useContext(UserContext);
 
+    const { name, tecnhology, email, networks, onInputChange } = useForm({
+        name: '',
+        technology: '',
+        email: '',
+        networks: '',
+    });
 
     const handleSubmit = (event) => {
-        event.preventDefault()
-        console.log(username, email, password)
-    }
+        event.preventDefault();
+        setUser([...user, { name, tecnhology, email, networks }]);
+    };
 
-    const focusRef = useRef()
-    useEffect(() =>{
-        focusRef.current.focus()
-    },[])
+    const focusRef = useRef();
+    useEffect(() => {
+        focusRef.current.focus();
+    }, []);
+
     return (
         <Box
             sx={{
@@ -39,35 +42,45 @@ const Formulario = () => {
                 <TextField
                     fullWidth
                     label="Nombre"
-                    name="username"
+                    name="name"
                     variant="outlined"
                     margin="normal"
-                    value={username}
+                    value={name}
                     onChange={onInputChange}
                     sx={{ marginBottom: '20px' }}
                 />
 
                 <TextField
-                    inputRef ={focusRef}
+                    inputRef={focusRef}
                     fullWidth
-                    label="Correo electrónico"
+                    label="Tecnología"
+                    name="tecnhology"
+                    variant="outlined"
+                    margin="normal"
+                    value={tecnhology}
+                    onChange={onInputChange}
+                    sx={{ marginBottom: '20px' }}
+                />
+
+                <TextField
+                    fullWidth
+                    label="Email"
                     name="email"
                     type="email"
                     variant="outlined"
                     margin="normal"
                     value={email}
                     onChange={onInputChange}
-                    sx={{ marginBottom: '20px' }}
+                    sx={{ marginBottom: '30px' }}
                 />
 
                 <TextField
                     fullWidth
-                    label="Contraseña"
-                    name="password"
-                    type="password"
+                    label="Redes"
+                    name="networks"
                     variant="outlined"
                     margin="normal"
-                    value={password}
+                    value={networks}
                     onChange={onInputChange}
                     sx={{ marginBottom: '30px' }}
                 />
